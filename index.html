@@ -33,6 +33,26 @@
             max-width: 100%;
             height: auto;
         }
+        main .card {
+            perspective: 1000px;
+        }
+        main .card-inner {
+            position: relative;
+            width: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        main .card.flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+        main .card-front, main .card-back {
+            position: absolute;
+            width: 100%;
+            backface-visibility: hidden;
+        }
+        main .card-back {
+            transform: rotateY(180deg);
+        }
         main p {
             font-size: 1.2em;
             line-height: 1.6;
@@ -51,20 +71,22 @@
     </header>
     <main>
         <img src="m.png" alt="Marathi Bhasha Divas" loading="lazy">
-        <p>Marathi Bhasha Divas is celebrated on 27th February every year to honor the Marathi language. This day commemorates the birth anniversary of the famous Marathi poet Vishnu Vaman Shirwadkar, also known as Kusumagraj. The day is marked by various cultural events, literary gatherings, and activities that promote the Marathi language and literature.</p>
+        <div class="card">
+            <div class="card-inner">
+                <div class="card-front">
+                    <p>Marathi Bhasha Divas is celebrated on 27th February every year to honor the Marathi language. This day commemorates the birth anniversary of the famous Marathi poet Vishnu Vaman Shirwadkar, also known as Kusumagraj. The day is marked by various cultural events, literary gatherings, and activities that promote the Marathi language and literature.</p>
+                </div>
+                <div class="card-back">
+                    <p>मराठी भाषा दिवस दरवर्षी २७ फेब्रुवारी रोजी मराठी भाषेचा सन्मान करण्यासाठी साजरा केला जातो. हा दिवस प्रसिद्ध मराठी कवी विष्णु वामन शिरवाडकर, ज्यांना कुसुमाग्रज म्हणूनही ओळखले जाते, यांच्या जयंतीनिमित्त साजरा केला जातो. या दिवशी विविध सांस्कृतिक कार्यक्रम, साहित्यिक सभा आणि मराठी भाषा आणि साहित्याला प्रोत्साहन देणाऱ्या उपक्रम आयोजन केले जाते.</p>
+                </div>
+            </div>
+        </div>
     </main>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const paragraph = document.querySelector('main p');
-            const originalText = paragraph.textContent;
-            const translatedText = "मराठी भाषा दिवस दरवर्षी २७ फेब्रुवारी रोजी मराठी भाषेचा सन्मान करण्यासाठी साजरा केला जातो. हा दिवस प्रसिद्ध मराठी कवी विष्णु वामन शिरवाडकर, ज्यांना कुसुमाग्रज म्हणूनही ओळखले जाते, यांच्या जयंतीनिमित्त साजरा केला जातो. या दिवशी विविध सांस्कृतिक कार्यक्रम, साहित्यिक सभा आणि मराठी भाषा आणि साहित्याला प्रोत्साहन देणाऱ्या उपक्रम आयोजन केले जाते.";
-
-            paragraph.addEventListener('click', function() {
-                if (paragraph.textContent === originalText) {
-                    paragraph.textContent = translatedText;
-                } else {
-                    paragraph.textContent = originalText;
-                }
+            const card = document.querySelector('.card');
+            card.addEventListener('click', function() {
+                card.classList.toggle('flipped');
             });
         });
     </script>
